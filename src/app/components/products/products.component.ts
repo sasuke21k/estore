@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductsService } from './products.service';
-import { ProductListItem } from './products.type';
+import { Product } from './products.type';
 import { CommonModule } from '@angular/common';
 import { RatingsComponent } from '../ratings/ratings.component';
 
@@ -13,10 +13,10 @@ import { RatingsComponent } from '../ratings/ratings.component';
 })
 export class ProductsComponent {
 
-  products:ProductListItem[] = [];
+  products:Product[] = [];
 
   constructor(productService: ProductsService) {
-    this.products = productService.getProductsList();
-  }
-
+    productService.getAllProducts().subscribe((products) => (
+       this.products = products));
+ }
 }
