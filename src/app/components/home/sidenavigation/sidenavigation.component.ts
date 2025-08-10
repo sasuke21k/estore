@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Category } from '../types/category';
@@ -17,11 +17,16 @@ export class SidenavigationComponent {
   private categoryStore = inject(CategoriesStoreItem);
 
   readonly categories = this.categoryStore.categories;
+  readonly subCategoryClicked = output<number>();
 
   getCategories(parentCategoriesId?:number):Category[]{
     return this.categories().filter
     (category => parentCategoriesId? category.parent_category_id===parentCategoriesId 
       : category.parent_category_id===null);
+  }
+
+  onSubCategoryClick(subCategory: Category): void {
+    this.subCategoryClicked.emit(subCategory.id);
   }
 
 }

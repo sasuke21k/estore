@@ -10,8 +10,13 @@ export class ProductsStoreItem {
     constructor(private productsService: ProductsService) {
         this.loadProducts();
     }
-       loadProducts():void {
-        this.productsService.getAllProducts()
+       loadProducts(filters?:
+        {
+            maincategoryid?: number;
+            subcategoryid?: number;
+        }
+       ):void {
+        this.productsService.getAllProducts(filters)
         .subscribe(
             (products) => this._products.set(products));
 
