@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { Category } from '../types/category';
 import { CategoriesStoreItem } from '../services/category/categories.storeItem';
 
@@ -11,8 +11,10 @@ import { CategoriesStoreItem } from '../services/category/categories.storeItem';
 })
 export class CatnavigationComponent {
  
-
+ readonly categoryClicked = output<number>();
   constructor(public categoryStore: CategoriesStoreItem){}
   
-
+ onCategoryClick(mainCategory: Category) {
+  this.categoryClicked.emit(mainCategory.id);
+}
 }
