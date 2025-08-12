@@ -4,13 +4,13 @@
             <h1 class="text-xl font-bold">estore</h1>           
         </div>
         <div class="p-0 my-4 w-[50%] h-[2.5rem] bg-white flex items-center ">
-            <select class="w-auto bg-gray-300 h-full border-none font-semibold px-2 pr-5">
+            <select #categoryOptions class="w-auto bg-gray-300 h-full border-none font-semibold px-2 pr-5">
               @for(category of categoryStore.topLevelCategories();track $index){
-                <option >{{category.category}}</option>
+                <option [value]="category.id">{{category.category}}</option>
               }
             </select>
-            <input class="w-[90%] h-full inline-block border-none outline-none px-3" placeholder="Search...."  type="text">
-            <button class="w-[10%] h-10 border-none bg-gray-300 flex justify-center items-center">
+            <input #keyword class="w-full h-full inline-block border-none outline-none px-3" placeholder="Search...."  type="text">
+            <button (click)="onclickSearch(keyword.value, categoryOptions.value)" class="w-[10%] h-10 border-none bg-gray-300 flex justify-center items-center">
                <fa-icon [icon]="faSearch"></fa-icon>
             </button>
         </div>   

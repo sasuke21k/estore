@@ -14,6 +14,7 @@ export class ProductsStoreItem {
         {
             maincategoryid?: number;
             subcategoryid?: number;
+            keyword?: string;
         }
        ):void {
         this.productsService.getAllProducts(filters)
