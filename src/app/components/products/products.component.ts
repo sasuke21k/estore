@@ -5,6 +5,10 @@ import { ProductsStoreItem } from '../home/services/product/products.storeitem';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { CartStoreItem } from '../home/services/cart/cart.storeItem';
+import { Product } from '../home/types/products.type';
+import { Cart } from '../home/types/cart.type';
 
 
 @Component({
@@ -16,8 +20,14 @@ import { RouterLink } from '@angular/router';
 export class ProductsComponent {
 
   faBoxOpen = faBoxOpen;
+  faShoppingCart = faShoppingCart;
 
-  constructor(public productsStoreItem:ProductsStoreItem) {
+  constructor(public productsStoreItem:ProductsStoreItem,
+    private  cart: CartStoreItem 
+  ) {}
     
- }
+  addToCart(product :Product){
+      this.cart.addProduct(product);
+    }
+ 
 }

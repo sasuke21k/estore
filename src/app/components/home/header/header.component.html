@@ -37,4 +37,47 @@
     }
   </div>
 
+  <!--Auth & Cart-->
+  <div
+  class="w-full md:w-[27%] flex items-center justify-between md:justify-end gap-4 text-white text-lg"
+>
+  <div class="flex items-center gap-2">
+    <fa-icon [icon]="faUserCircle" class="text-[1.3em]"></fa-icon>
+    <a
+      href="#"
+      class="px-1 py-1 rounded transition-all duration-300 hover:bg-white hover:text-gray-900"
+      >Sign in</a
+    >
+    <span>/</span>
+    <a
+      href="#"
+      class="px-1 py-1 rounded transition-all duration-300 hover:bg-white hover:text-gray-900"
+      >Register</a
+    >
+  </div>
+  <div class="relative flex items-center ">
+    <button type="button"
+    class="flex items-center justify-center text-white px-2
+    rounded-full bg-gray-700 hover:bg-gray-800 transition-colors cursor-pointer"
+    (click)="navigateToCart()">
+      <fa-icon [icon]="faShoppingCart" class="text-[1.3em]"></fa-icon>
+    </button>
+    @if(cart.cart()){
+      @if(cart.totalProducts() > 0){
+        <span class="absolute -top-1 -right-1 flex items-center 
+        justify-center text-[0.7rem] font-semibold text-white
+        bg-amber-500 rounded-full w-5 h-5">
+      {{cart.totalProducts()}}
+        </span>
+      } @else {
+        <span class="absolute -top-1 -right-1 flex items-center 
+        justify-center text-[0.7rem] font-semibold text-white
+        bg-gray-500 rounded-full w-5 h-5">
+      </span>
+    }
+  }
+    
+  </div>
+</div>
+
 </div>

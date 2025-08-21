@@ -22,5 +22,10 @@
     <div class="text-[1.5em] font-semibold text-gray-700 mb-6">
       {{ product()?.product_description }}
     </div>
+    <button class="flex items-center gap-3 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold
+     px-6 py-3 rounded-lg transition-colors duration-300 shadow cursor-pointer" (click)="addToCart()">
+     <fa-icon [icon]="faShoppingCart" class="text-lg"></fa-icon>
+      <span class="text-lg">Add to Cart</span>
+    </button>
   </div>
 </div>

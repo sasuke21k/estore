@@ -7,6 +7,7 @@ import { ProductsStoreItem } from './services/product/products.storeitem';
 import { ProductsService } from './services/product/products.service';
 import { SearchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet } from '@angular/router';
+import { CartStoreItem } from './services/cart/cart.storeItem';
 
 
 
@@ -15,7 +16,7 @@ import { RouterOutlet } from '@angular/router';
   imports: [HeaderComponent, CatnavigationComponent, RouterOutlet],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers: [CategoryService, CategoriesStoreItem,ProductsStoreItem,ProductsService],
+  providers: [CategoryService, CategoriesStoreItem,ProductsStoreItem,ProductsService,CartStoreItem],
 })
 export class HomeComponent {
 
