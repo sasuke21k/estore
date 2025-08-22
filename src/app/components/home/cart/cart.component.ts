@@ -26,4 +26,16 @@ export class CartComponent {
     this.router.navigate(['home/products']);
   }
 
+  updateQuantity($event: any, cartItem:CartItem): void {
+   if($event.target.innerText === '+'){
+    this.cartStore.addProduct(cartItem.product);
+   }else if($event.target.innerText === '-'){
+    this.cartStore.decreaseProductQuantity(cartItem);
+   }
+  }
+
+  removeItem(cartItem: CartItem): void {
+    this.cartStore.removeProduct(cartItem);
+  }
+
 }

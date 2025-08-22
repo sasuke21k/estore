@@ -16,7 +16,9 @@
        </button>
         </div>
     }@else if(cartStore.cart()){
-        <div class="w-[70%] text-center mx-auto my-12">
+        <div class="w-[90%]  mx-auto my-12">
+            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full lg:w-[70%] text-center">
             @for(cartItem of cartStore.cart().products;track cartItem)
             {
             <div class="flex flex-wrap md:flex-nowrap mb-8 shadow-md p-4
@@ -33,12 +35,55 @@
                    <div class="my-2">
                     <app-ratings [score]="cartItem.product.ratings"></app-ratings>
                    </div>
-                </div>
+                      <hr class="my-3 border-gray-300" />
 
+                       <div class="flex items-center flex-wrap gap-4">
+                         <div class="flex border rounded overflow-hidden" (click)="updateQuantity($event, cartItem)">
+                          <button class="px-3 py-1 bg-gray-200 hover:bg-gray300 font-bold cursor-pointer">
+                            -
+                          </button>                   
+                         <div class="px-4 py-1 font-semibold text-center min-w-[3rem]">
+                            {{ cartItem.quantity }}
+                         </div>
+                       <button class="px-3 py-1 bg-gray-200 hover:bg-gray300 font-bold cursor-pointer">+</button>
+                        </div>
+                     <button type="button" class="bg-red-500 hover:bg-red-600 text-white
+                     font-semibold px-4 py-2 rounded cursor-pointer flex items-center gap-2" 
+                     (click)="removeItem(cartItem)">
+                     <fa-icon [icon]="faTrash" class="text-lg"></fa-icon>
+                     Remove Item
+                    </button>
+                </div>                    
+            </div>
         </div>
             }
-
         </div>
+  <!-- Cart Summary -->
+      <div class="w-full lg:w-[30%] h-fit bg-gray-50 p-6 rounded-lg shadow-md">
+       <h2 class="text-2xl font-bold mb-4">Summary</h2>
+
+       <div class="text-left space-y-2">
+      <p class="text-gray-600">
+        Cart Total: {{ cartStore.cart().totalAmount | currency }}
+      </p>
+      <p class="text-gray-600">
+        Shipping Charges:
+        <span class="font-semibold">Free</span>
+      </p>
+      <hr />
+      <p class="text-xl font-bold">
+        Total: {{ cartStore.cart().totalAmount | currency }}
+      </p>
+    </div>
+
+    <button
+      class="w-full mt-5 bg-gray-800 text-white py-2 rounded hover:bg-gray-900 transition cursor-pointer"
+    >
+      Checkout
+    </button>
+  </div>
+  </div>
+  </div>
 
     }
 </ng-container>

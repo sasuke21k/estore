@@ -1,10 +1,19 @@
-import { computed, signal } from "@angular/core";
-import { CartItem } from "../../types/cart.type";
+import { computed, effect, signal } from "@angular/core";
+import { Cart, CartItem } from "../../types/cart.type";
 import { Product } from "../../types/products.type";
 
 export class CartStoreItem {
 
-    private readonly _products = signal<CartItem[]>([]);
+    private readonly _products = signal<CartItem[]>(this.loadFromSession());
+
+    private _saveEffect = effect(() => {
+        const products = this._products();
+        if(products.length === 0){
+            sessionStorage.removeItem('cart');
+        }else{
+            sessionStorage.setItem('cart',JSON.stringify(products));
+        }
+    });
 
     readonly totalAmount = computed(() => this._products().reduce((sum, item) => sum + item.amount, 0));
 
@@ -39,6 +48,40 @@ export class CartStoreItem {
             };
             this._products.set(updatedItems);
             
+        }
+    }
+
+    decreaseProductQuantity(cartItem : CartItem):void{
+        const updatedItems = this._products().map(item => {
+            if(item.product.id === cartItem.product.id){
+               if(item.quantity<=1){
+                return null;
+               }
+               return {
+                ...item,
+                quantity: item.quantity - 1,
+                amount: item.amount - Number(item.product.price),
+               };
+            }
+            return item;
+        }).filter(Boolean)as CartItem[]; //Remove null values
+
+        this._products.set(updatedItems);
+
+    }
+
+    removeProduct(cartItem:CartItem):void{
+        const updatedItems = this._products().filter(item => item.product.id !== cartItem.product.id);
+        this._products.set(updatedItems);
+    }
+
+
+    private loadFromSession():CartItem[]{
+        const storedProducts = sessionStorage.getItem('cart');
+        try{
+            return storedProducts ? JSON.parse(storedProducts) : [];
+        }catch{
+            return [];
         }
     }
     
